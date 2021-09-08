@@ -27,4 +27,44 @@ class ArticlesCubit extends Cubit<ArticlesState> {
       emit(ArticlesLoadedState(business));
     }
   }
+
+  List<Articles> technologies = [];
+  List<Articles> getTechnologyArticles() {
+    if (technologies.length == 0) {
+      emit(ArticlesLoadingState());
+      newsRepository.getAllArticles(url, {
+        'country': 'eg',
+        'category': 'technology',
+        'apiKey': apiKey
+      }).then((articles) {
+        technologies = articles;
+        emit(ArticlesLoadedState(technologies));
+      }).catchError((err) {
+        emit(ArticlesErrorState(err.toString()));
+      });
+    } else {
+      emit(ArticlesLoadedState(technologies));
+    }
+    return technologies;
+  }
+
+  List<Articles> science = [];
+  List<Articles> getScienceArticles() {
+    if (science.length == 0) {
+      emit(ArticlesLoadingState());
+      newsRepository.getAllArticles(url, {
+        'country': 'eg',
+        'category': 'science',
+        'apiKey': apiKey
+      }).then((articles) {
+        science = articles;
+        emit(ArticlesLoadedState(science));
+      }).catchError((err) {
+        emit(ArticlesErrorState(err.toString()));
+      });
+    } else {
+      emit(ArticlesLoadedState(science));
+    }
+    return science;
+  }
 }
