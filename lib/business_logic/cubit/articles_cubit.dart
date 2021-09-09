@@ -1,30 +1,22 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news_app_project/business_logic/cubit/articles_states.dart';
-import 'package:news_app_project/constants.dart';
-import 'package:news_app_project/data/models/articles.dart';
-import 'package:news_app_project/data/repository/news_repository.dart';
+import 'package:news_app/business_logic/cubit/articles_states.dart';
+import 'package:news_app/data/models/articles.dart';
+import 'package:news_app/data/repository/news_repository.dart';
+import 'package:news_app/shared/constants.dart';
 
 class ArticlesCubit extends Cubit<ArticlesState> {
-  ArticlesCubit(this.newsRepository) : super(ArticlesInitState());
+  ArticlesCubit( this.newsRepository)
+      : super(ArticlesInitialState());
   final NewsRepository newsRepository;
-
-  int indexScreen = 0;
-  final List<Widget> screens = [];
-
-  chooseBottomNavigationScreen(int index) {
-    indexScreen = index;
-    emit(BottomNavigationScreenState());
-  }
 
   List<Articles> business = [];
   getBusinessArticles() {
     emit(ArticlesLoadingState());
     if (business.length == 0) {
-      newsRepository.getAllArticles(url, {
+      newsRepository.getAllArticles(AppConstants.URL, {
         'country': 'eg',
         'category': 'business',
-        'apiKey': apiKey
+        'apiKey': AppConstants.API_KEY
       }).then((value) {
         business = value;
         emit(ArticlesLoadedState(business));
@@ -40,10 +32,10 @@ class ArticlesCubit extends Cubit<ArticlesState> {
   List<Articles> getTechnologyArticles() {
     if (technologies.length == 0) {
       emit(ArticlesLoadingState());
-      newsRepository.getAllArticles(url, {
+      newsRepository.getAllArticles(AppConstants.URL, {
         'country': 'eg',
         'category': 'technology',
-        'apiKey': apiKey
+        'apiKey': AppConstants.API_KEY
       }).then((articles) {
         technologies = articles;
         emit(ArticlesLoadedState(technologies));
@@ -60,10 +52,10 @@ class ArticlesCubit extends Cubit<ArticlesState> {
   List<Articles> getScienceArticles() {
     if (science.length == 0) {
       emit(ArticlesLoadingState());
-      newsRepository.getAllArticles(url, {
+      newsRepository.getAllArticles(AppConstants.URL, {
         'country': 'eg',
         'category': 'science',
-        'apiKey': apiKey
+        'apiKey': AppConstants.API_KEY
       }).then((articles) {
         science = articles;
         emit(ArticlesLoadedState(science));
