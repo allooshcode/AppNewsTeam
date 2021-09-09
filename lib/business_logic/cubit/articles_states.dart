@@ -1,12 +1,10 @@
 import 'package:flutter/cupertino.dart';
-import 'package:news_app_project/data/models/articles.dart';
+import 'package:news_app/data/models/articles.dart';
 
 @immutable
 abstract class ArticlesState {}
 
-class ArticlesInitState extends ArticlesState {}
-
-class BottomNavigationScreenState extends ArticlesState {}
+class ArticlesInitialState extends ArticlesState {}
 
 class ArticlesLoadingState extends ArticlesState {}
 
