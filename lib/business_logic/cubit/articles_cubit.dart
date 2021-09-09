@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app_project/business_logic/cubit/articles_states.dart';
 import 'package:news_app_project/constants.dart';
@@ -7,6 +8,14 @@ import 'package:news_app_project/data/repository/news_repository.dart';
 class ArticlesCubit extends Cubit<ArticlesState> {
   ArticlesCubit(this.newsRepository) : super(ArticlesInitState());
   final NewsRepository newsRepository;
+
+  int indexScreen = 0;
+  final List<Widget> screens = [];
+
+  chooseBottomNavigationScreen(int index) {
+    indexScreen = index;
+    emit(BottomNavigationScreenState());
+  }
 
   List<Articles> business = [];
   getBusinessArticles() {

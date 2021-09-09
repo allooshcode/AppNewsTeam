@@ -1,5 +1,5 @@
 import 'package:news_app_project/data/models/articles.dart';
-import 'package:news_app_project/data/web_services.dart';
+import 'package:news_app_project/data/web_services/web_services.dart';
 
 class NewsRepository {
   final DioHelper dioHelper;

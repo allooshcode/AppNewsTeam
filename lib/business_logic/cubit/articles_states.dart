@@ -6,6 +6,8 @@ abstract class ArticlesState {}
 
 class ArticlesInitState extends ArticlesState {}
 
+class BottomNavigationScreenState extends ArticlesState {}
+
 class ArticlesLoadingState extends ArticlesState {}
 
 class ArticlesLoadedState extends ArticlesState {

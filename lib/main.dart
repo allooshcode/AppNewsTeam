@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news_app_project/app_router.dart';
-import 'package:news_app_project/data/web_services.dart';
+import 'package:news_app_project/data/web_services/web_services.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

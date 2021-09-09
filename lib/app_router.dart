@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app_project/business_logic/cubit/articles_cubit.dart';
 import 'package:news_app_project/constants.dart';
 import 'package:news_app_project/data/repository/news_repository.dart';
-import 'package:news_app_project/data/web_services.dart';
+import 'package:news_app_project/data/web_services/web_services.dart';
 
 class AppRouter {
   late final NewsRepository newsRepository;
