@@ -5,8 +5,7 @@ import 'package:news_app_project/data/models/articles.dart';
 import 'package:news_app_project/data/repository/news_repository.dart';
 
 class ArticlesCubit extends Cubit<ArticlesState> {
-  ArticlesCubit(ArticlesState initialState, this.newsRepository)
-      : super(initialState);
+  ArticlesCubit(this.newsRepository) : super(ArticlesInitState());
   final NewsRepository newsRepository;
 
   List<Articles> business = [];

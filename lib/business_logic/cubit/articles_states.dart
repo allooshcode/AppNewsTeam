@@ -4,6 +4,8 @@ import 'package:news_app_project/data/models/articles.dart';
 @immutable
 abstract class ArticlesState {}
 
+class ArticlesInitState extends ArticlesState {}
+
 class ArticlesLoadingState extends ArticlesState {}
 
 class ArticlesLoadedState extends ArticlesState {

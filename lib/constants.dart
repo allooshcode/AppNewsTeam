@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+const String homeScreen = '/';
+
+const String articleDetailsScreen = '/articleDetails';
+
 const String apiKey = '3e97c94077024c528b31195a04889935';
 
 const String baseUrl = 'https://newsapi.org/';

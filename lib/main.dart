@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:news_app_project/app_router.dart';
 import 'package:news_app_project/data/web_services.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   DioHelper.dioInit();
-  runApp(MyApp());
+  runApp(MyApp(AppRouter()));
 }
 
 class MyApp extends StatelessWidget {
+  final AppRouter appRouter;
+  MyApp(this.appRouter);
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -26,6 +29,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: MyHomePage(title: 'Flutter Demo Home Page'),
+      onGenerateRoute: appRouter.generateRoute,
     );
   }
 }
