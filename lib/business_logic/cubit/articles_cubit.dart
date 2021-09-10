@@ -5,14 +5,13 @@ import 'package:news_app/data/repository/news_repository.dart';
 import 'package:news_app/shared/constants.dart';
 
 class ArticlesCubit extends Cubit<ArticlesState> {
-  ArticlesCubit( this.newsRepository)
-      : super(ArticlesInitialState());
+  ArticlesCubit(this.newsRepository) : super(ArticlesInitialState());
   final NewsRepository newsRepository;
 
   List<Articles> business = [];
   getBusinessArticles() {
-    emit(ArticlesLoadingState());
     if (business.length == 0) {
+      emit(ArticlesLoadingState());
       newsRepository.getAllArticles(AppConstants.URL, {
         'country': 'eg',
         'category': 'business',
