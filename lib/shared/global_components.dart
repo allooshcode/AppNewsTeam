@@ -6,13 +6,12 @@ Widget listItem({required Articles article}) {
   return Builder(
     builder: (context) => InkWell(
       onTap: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (_) => DetailsScreen(
-              article: article,
-            ),
+        Navigator.of(context, rootNavigator: true)
+            .pushReplacement(MaterialPageRoute(
+          builder: (context) => new DetailsScreen(
+            article: article,
           ),
-        );
+        ));
       },
       child: Row(
         children: [
@@ -33,17 +32,14 @@ Widget listItem({required Articles article}) {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  article.title,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                ),
-                Text(
-                  article.description,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
+                Text(article.title,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: Theme.of(context).textTheme.bodyText1),
+                Text(article.description,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: Theme.of(context).textTheme.bodyText1),
                 SizedBox(
                   height: 12,
                 ),
@@ -51,7 +47,7 @@ Widget listItem({required Articles article}) {
                   article.publishedAt,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(fontSize: 12, color: Colors.grey),
+                  style: TextStyle(fontSize: 14, color: Colors.grey),
                 ),
               ],
             ),

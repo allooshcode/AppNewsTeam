@@ -50,7 +50,6 @@ class AppRouter {
           ),
         );
 
-
       default:
         throw Exception('route ${routeSettings.name} not found');
     }

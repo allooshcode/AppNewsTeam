@@ -8,6 +8,13 @@ class ArticlesCubit extends Cubit<ArticlesState> {
   ArticlesCubit(this.newsRepository) : super(ArticlesInitialState());
   final NewsRepository newsRepository;
 
+  bool isDark = false;
+
+  changeThemeMode() {
+    isDark = !isDark;
+    emit(ArticlesThemeMode());
+  }
+
   List<Articles> business = [];
   getBusinessArticles() {
     if (business.length == 0) {
