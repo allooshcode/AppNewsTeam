@@ -1,12 +1,24 @@
 import 'package:flutter/material.dart';
+<<<<<<< Updated upstream
 import 'package:news_app_project/app_router.dart';
 import 'package:news_app_project/data/web_services/web_services.dart';
+=======
+import 'package:news_app/shared/colors.dart';
+import 'package:news_app/shared/themes.dart';
+import 'package:news_app/ui/routing/app_router.dart';
+import 'package:news_app/ui/screens/01-splash/splash_screen.dart';
+import 'package:news_app/ui/screens/02-home/home_screen.dart';
+import 'package:page_transition/page_transition.dart';
+
+import 'data/web_services.dart';
+>>>>>>> Stashed changes
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   DioHelper.dioInit();
   runApp(MyApp(AppRouter()));
 }
+<<<<<<< Updated upstream
 
 class MyApp extends StatelessWidget {
   final AppRouter appRouter;
@@ -50,6 +62,19 @@ class MyHomePage extends StatefulWidget {
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
+=======
+class NewsApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: AppTheme.light,
+      darkTheme: AppTheme.dark,
+      themeMode: ThemeMode.dark,
+      home: SplashScreen(),
+    );
+  }
+
+>>>>>>> Stashed changes
 }
 
 class _MyHomePageState extends State<MyHomePage> {
