@@ -70,13 +70,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 });
                 if (index == 0) {
                   _keyNavigator.currentState!
-                      .pushNamed(AppRouter.BUSINESS_SCREEN);
+                      .pushReplacementNamed(AppRouter.BUSINESS_SCREEN);
                 } else if (index == 1) {
                   _keyNavigator.currentState!
-                      .pushNamed(AppRouter.TECHNOLOGY_SCREEN);
+                      .pushReplacementNamed(AppRouter.TECHNOLOGY_SCREEN);
                 } else {
                   _keyNavigator.currentState!
-                      .pushNamed(AppRouter.SCIENCE_SCREEN);
+                      .pushReplacementNamed(AppRouter.SCIENCE_SCREEN);
                 }
                 print('index = $index');
               },

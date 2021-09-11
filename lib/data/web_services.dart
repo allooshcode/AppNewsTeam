@@ -19,7 +19,9 @@ class DioHelper {
     return response;
   }
 
-  // Future<Response> searchData({required String url, required Map<String, dynamic> query})async{
-  //   final response  = await dio.get(url,queryParameters:query )
-  // }
+  Future<Response> searchData(
+      {required String url, required Map<String, dynamic> query}) async {
+    final response = await dio.get(url, queryParameters: query);
+    return response;
+  }
 }
