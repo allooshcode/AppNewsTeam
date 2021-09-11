@@ -9,6 +9,7 @@ class ArticlesCubit extends Cubit<ArticlesState> {
   ArticlesCubit(this.newsRepository) : super(ArticlesInitState());
   final NewsRepository newsRepository;
 
+<<<<<<< Updated upstream
   int indexScreen = 0;
   final List<Widget> screens = [];
 
@@ -16,6 +17,9 @@ class ArticlesCubit extends Cubit<ArticlesState> {
     indexScreen = index;
     emit(BottomNavigationScreenState());
   }
+=======
+
+>>>>>>> Stashed changes
 
   List<Articles> business = [];
   getBusinessArticles() {
@@ -74,5 +78,14 @@ class ArticlesCubit extends Cubit<ArticlesState> {
       emit(ArticlesLoadedState(science));
     }
     return science;
+  }
+  void makeBusinessArticlesEmpty(){
+    business = [];
+  }
+  void makeTechnologyArticlesEmpty(){
+    technologies = [];
+  }
+  void makeScienceArticlesEmpty(){
+    science = [];
   }
 }
