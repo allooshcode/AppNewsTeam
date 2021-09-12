@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news_app/business_logic/cubit/articles_cubit.dart';
-import 'package:news_app/business_logic/cubit/articles_states.dart';
-import 'package:news_app/data/repository/news_repository.dart';
-import 'package:news_app/data/web_services.dart';
-import 'package:news_app/shared/colors.dart';
+import 'package:news_app/shared/constants.dart';
+import 'package:news_app/shared/global_components/app_bar.dart';
 import 'package:news_app/ui/routing/app_router.dart';
-import 'package:news_app/ui/screens/03-business/business_screen.dart';
-import 'package:news_app/ui/screens/04-technology/technology_screen.dart';
-import 'package:news_app/ui/screens/05-science/science_screen.dart';
+import 'package:news_app/ui/screens/02-home/local_components/bottom_navigation.dart';
+
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -16,78 +11,51 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int index = 0;
+  int currentScreenIndex = 0;
+  List<String> screens=[
+    AppConstants.BUSINESS_SCREEN,
+    AppConstants.TECHNOLOGY_SCREEN,
+    AppConstants.SCIENCE_SCREEN,
+  ];
 
-  final _keyNavigator = GlobalKey<NavigatorState>();
+  final _navigatorKey = GlobalKey<NavigatorState>();
+  AppRouter _appRouter = AppRouter();
+
+  @override
+  void dispose() {
+    _appRouter.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<ArticlesCubit, ArticlesState>(
-      listener: (context, state) {},
-      builder: (context, state) {
-        ArticlesCubit _cubit = BlocProvider.of<ArticlesCubit>(context);
-
-        return Scaffold(
-            appBar: AppBar(
-              title: Text(
-                'News app',
-                // style: TextStyle(color: AppColors.main),
-              ),
-              actions: [
-                Switch(
-                    value: _cubit.isDark,
-                    onChanged: (value) {
-                      _cubit.changeThemeMode();
-                    })
-              ],
-              // backgroundColor: AppColors.scaffoldBackground,
-              // titleSpacing: 12,
-              // elevation: 0,
-            ),
-            body: Navigator(
-              key: _keyNavigator,
-              onGenerateRoute: AppRouter().onGenerateRoute,
-              initialRoute: AppRouter.BUSINESS_SCREEN,
-            ),
-            bottomNavigationBar: BottomNavigationBar(
-              items: [
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.business),
-                  label: 'Business',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.phone_android),
-                  label: 'Technology',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.science),
-                  label: 'Science',
-                ),
-              ],
-              currentIndex: index,
-              onTap: (index) {
-                setState(() {
-                  this.index = index;
-                });
-                if (index == 0) {
-                  _keyNavigator.currentState!
-                      .pushReplacementNamed(AppRouter.BUSINESS_SCREEN);
-                } else if (index == 1) {
-                  _keyNavigator.currentState!
-                      .pushReplacementNamed(AppRouter.TECHNOLOGY_SCREEN);
-                } else {
-                  _keyNavigator.currentState!
-                      .pushReplacementNamed(AppRouter.SCIENCE_SCREEN);
-                }
-                print('index = $index');
-              },
-              selectedItemColor:
-                  Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
-              elevation: 2,
-              showUnselectedLabels: false,
-              backgroundColor:
-                  Theme.of(context).bottomNavigationBarTheme.backgroundColor,
-            ));
-      },
+    return Scaffold(
+      appBar: defaultAppBar(),
+      body: WillPopScope(
+        onWillPop: _checkIfScreenCanBePopped,
+        child: Navigator(
+          key: _navigatorKey,
+          initialRoute: screens[0],
+          onGenerateRoute: _appRouter.onGenerateRoute,
+        ),
+      ),
+      bottomNavigationBar: buildBottomNavigation(
+        onItemClicked: (index) {
+          setState(() {
+            _navigatorKey.currentState!.pushNamed(screens[index]);
+            currentScreenIndex = index;
+          });
+        },
+        currentIndex: currentScreenIndex,
+      ),
     );
   }
+  Future<bool> _checkIfScreenCanBePopped()async{
+    if(_navigatorKey.currentState!.canPop()) {
+      _navigatorKey.currentState!.pop();
+      return true;
+    }
+    return false;
+  }
+
 }

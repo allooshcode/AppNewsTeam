@@ -5,25 +5,17 @@ import 'package:news_app/data/repository/news_repository.dart';
 import 'package:news_app/shared/constants.dart';
 
 class ArticlesCubit extends Cubit<ArticlesState> {
-  ArticlesCubit(this.newsRepository) : super(ArticlesInitialState());
   final NewsRepository newsRepository;
-
-  bool isDark = false;
-
-  changeThemeMode() {
-    isDark = !isDark;
-    emit(ArticlesThemeMode());
-  }
-
   List<Articles> business = [];
-  getBusinessArticles() {
+  List<Articles> technologies = [];
+  List<Articles> science = [];
+
+  ArticlesCubit(this.newsRepository) : super(ArticlesInitialState());
+
+  void getBusinessArticles() {
     if (business.length == 0) {
       emit(ArticlesLoadingState());
-      newsRepository.getAllArticles(AppConstants.URL, {
-        'country': 'eg',
-        'category': 'business',
-        'apiKey': AppConstants.API_KEY
-      }).then((value) {
+      newsRepository.getAllArticles('business').then((value) {
         business = value;
         emit(ArticlesLoadedState(business));
       }).catchError((err) {
@@ -34,15 +26,10 @@ class ArticlesCubit extends Cubit<ArticlesState> {
     }
   }
 
-  List<Articles> technologies = [];
   List<Articles> getTechnologyArticles() {
     if (technologies.length == 0) {
       emit(ArticlesLoadingState());
-      newsRepository.getAllArticles(AppConstants.URL, {
-        'country': 'eg',
-        'category': 'technology',
-        'apiKey': AppConstants.API_KEY
-      }).then((articles) {
+      newsRepository.getAllArticles('technology').then((articles) {
         technologies = articles;
         emit(ArticlesLoadedState(technologies));
       }).catchError((err) {
@@ -54,15 +41,10 @@ class ArticlesCubit extends Cubit<ArticlesState> {
     return technologies;
   }
 
-  List<Articles> science = [];
   List<Articles> getScienceArticles() {
     if (science.length == 0) {
       emit(ArticlesLoadingState());
-      newsRepository.getAllArticles(AppConstants.URL, {
-        'country': 'eg',
-        'category': 'science',
-        'apiKey': AppConstants.API_KEY
-      }).then((articles) {
+      newsRepository.getAllArticles('science').then((articles) {
         science = articles;
         emit(ArticlesLoadedState(science));
       }).catchError((err) {
@@ -72,5 +54,14 @@ class ArticlesCubit extends Cubit<ArticlesState> {
       emit(ArticlesLoadedState(science));
     }
     return science;
+  }
+  void makeBusinessArticlesEmpty(){
+    business = [];
+  }
+  void makeTechnologyArticlesEmpty(){
+    technologies = [];
+  }
+  void makeScienceArticlesEmpty(){
+    science = [];
   }
 }

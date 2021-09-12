@@ -7,23 +7,23 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.scaffoldBackground,
       body: AnimatedSplashScreen(
         duration: 4000,
-        splash: Text(
-          'Newsly',
-          style: TextStyle(
-            fontSize: 42,
-            fontWeight: FontWeight.bold,
-            letterSpacing: 8,
-            color: AppColors.main,
-          ),
-        ),
+        splash: _buildBody(),
         nextScreen: HomeScreen(),
-        //pageTransitionType: PageTransitionType.rotate,
-        //scale is fine
         splashTransition: SplashTransition.fadeTransition,
-        backgroundColor: AppColors.scaffoldBackground,
+        backgroundColor: AppColors.scaffoldBackgroundDark,
+      ),
+    );
+  }
+  Widget _buildBody(){
+    return Text(
+      'Newsly',
+      style: TextStyle(
+        fontSize: 42,
+        fontWeight: FontWeight.bold,
+        letterSpacing: 8,
+        color: AppColors.main,
       ),
     );
   }
