@@ -1,5 +1,9 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_app/business_logic/cubit/articles_cubit.dart';
+import 'package:news_app/data/repository/news_repository.dart';
+import 'package:news_app/data/web_services.dart';
 import 'package:news_app/shared/colors.dart';
 import 'package:news_app/ui/screens/02-home/home_screen.dart';
 

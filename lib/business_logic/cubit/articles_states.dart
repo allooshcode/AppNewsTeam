@@ -4,8 +4,6 @@ import 'package:news_app/data/models/articles.dart';
 @immutable
 abstract class ArticlesState {}
 
-class ArticlesThemeMode extends ArticlesState {}
-
 class ArticlesInitialState extends ArticlesState {}
 
 class ArticlesLoadingState extends ArticlesState {}
@@ -19,3 +17,14 @@ class ArticlesErrorState extends ArticlesState {
   final String error;
   ArticlesErrorState(this.error);
 }
+
+class ArticlesSearchLoading extends ArticlesState {}
+
+class ArticlesSearchFinished extends ArticlesState {}
+
+class ArticlesSearchLoadedState extends ArticlesState {
+  final List<Articles> articles;
+  ArticlesSearchLoadedState({required this.articles});
+}
+
+class ArticleNavigationState extends ArticlesState {}

@@ -5,6 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:news_app/business_logic/cubit/articles_cubit.dart';
 import 'package:news_app/business_logic/cubit/articles_states.dart';
+import 'package:news_app/business_logic/cubit/theme_cubit/theme_cubit.dart';
+import 'package:news_app/business_logic/cubit/theme_cubit/theme_states.dart';
 import 'package:news_app/data/repository/news_repository.dart';
 import 'package:news_app/shared/colors.dart';
 import 'package:news_app/ui/routing/app_router.dart';
@@ -29,12 +31,21 @@ class _NewsAppState extends State<NewsApp> {
   AppRouter _appRouter = AppRouter();
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<ArticlesCubit>(
-      create: (_) => ArticlesCubit(NewsRepository(DioHelper())),
-      child: BlocConsumer<ArticlesCubit, ArticlesState>(
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<ThemeCubit>(
+          create: (_) => ThemeCubit(),
+        ),
+        BlocProvider(
+            create: (_) => ArticlesCubit(NewsRepository(DioHelper()))
+              ..getScienceArticles()
+              ..getTechnologyArticles()
+              ..getBusinessArticles()),
+      ],
+      child: BlocConsumer<ThemeCubit, ThemeState>(
         listener: (context, state) {},
         builder: (context, state) {
-          ArticlesCubit _cubit = BlocProvider.of<ArticlesCubit>(context);
+          ThemeCubit _cubitTheme = BlocProvider.of<ThemeCubit>(context);
 
           return MaterialApp(
             debugShowCheckedModeBanner: false,
@@ -93,7 +104,7 @@ class _NewsAppState extends State<NewsApp> {
                     backgroundColor: HexColor('333739'),
                     elevation: 0,
                     iconTheme: IconThemeData(color: Colors.white))),
-            themeMode: _cubit.isDark ? ThemeMode.dark : ThemeMode.light,
+            themeMode: _cubitTheme.isDark ? ThemeMode.dark : ThemeMode.light,
 
             home: SplashScreen(),
             onUnknownRoute: (_) =>

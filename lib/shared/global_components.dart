@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_app/business_logic/cubit/articles_cubit.dart';
 import 'package:news_app/data/models/articles.dart';
 import 'package:news_app/ui/screens/06-details/details_screen.dart';
 
@@ -58,20 +60,35 @@ Widget listItem({required Articles article}) {
   );
 }
 
-Widget buildArticlesList({required List<Articles> articles}) {
-  return Padding(
-    padding: EdgeInsets.only(left: 12, right: 12),
-    child: ListView.separated(
-      itemBuilder: (context, index) {
-        return listItem(article: articles[index]);
-      },
-      separatorBuilder: (context, index) {
-        return SizedBox(
-          height: 16,
-        );
-      },
-      itemCount: articles.length,
-      physics: BouncingScrollPhysics(),
+Widget buildArticlesList(
+    {required List<Articles> articles,
+    required BuildContext context,
+    required String onRefresh}) {
+  return RefreshIndicator(
+    onRefresh: () async {
+      final _cubit = BlocProvider.of<ArticlesCubit>(context);
+      if (onRefresh == 'business') {
+        _cubit.getBusinessArticles();
+      } else if (onRefresh == 'tech') {
+        _cubit.getTechnologyArticles();
+      } else {
+        _cubit.getScienceArticles();
+      }
+    },
+    child: Padding(
+      padding: EdgeInsets.only(left: 12, right: 12),
+      child: ListView.separated(
+        itemBuilder: (context, index) {
+          return listItem(article: articles[index]);
+        },
+        separatorBuilder: (context, index) {
+          return SizedBox(
+            height: 16,
+          );
+        },
+        itemCount: articles.length,
+        physics: BouncingScrollPhysics(),
+      ),
     ),
   );
 }

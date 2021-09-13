@@ -29,25 +29,17 @@ class AppRouter {
       case HOME_SCREEN:
         return MaterialPageRoute(builder: (context) => HomeScreen());
       case BUSINESS_SCREEN:
+        print(_articlesCubit.business.length);
         return MaterialPageRoute(
-          builder: (context) => BlocProvider.value(
-            value: _articlesCubit,
-            child: BusinessScreen(),
-          ),
+          builder: (context) => BusinessScreen(),
         );
       case TECHNOLOGY_SCREEN:
         return MaterialPageRoute(
-          builder: (context) => BlocProvider.value(
-            value: _articlesCubit,
-            child: TechnologyScreen(),
-          ),
+          builder: (context) => TechnologyScreen(),
         );
       case SCIENCE_SCREEN:
         return MaterialPageRoute(
-          builder: (context) => BlocProvider.value(
-            value: _articlesCubit,
-            child: ScienceScreen(),
-          ),
+          builder: (context) => ScienceScreen(),
         );
 
       default:

@@ -42,13 +42,26 @@ class _DetailsScreenState extends State<DetailsScreen> {
       ),
       body: SafeArea(
         child: Stack(children: [
-          WebView(
-            initialUrl: widget.article.url,
-            onPageFinished: (_) {
-              setState(() {
-                isLoading = false;
-              });
-            },
+          Column(
+            children: [
+              Hero(
+                tag: widget.article.publishedAt,
+                child: Image.network(widget.article.urlToImage),
+              ),
+              Expanded(
+                child: Container(
+                  child: WebView(
+                    javascriptMode: JavascriptMode.unrestricted,
+                    initialUrl: widget.article.url,
+                    onPageFinished: (_) {
+                      setState(() {
+                        isLoading = false;
+                      });
+                    },
+                  ),
+                ),
+              ),
+            ],
           ),
           if (isLoading) LinearProgressIndicator()
         ]),

@@ -1,11 +1,27 @@
 import 'package:news_app/data/models/articles.dart';
 import 'package:news_app/data/web_services.dart';
+import 'package:news_app/shared/constants.dart';
 
 class NewsRepository {
   final DioHelper dioHelper;
   NewsRepository(this.dioHelper);
 
-  // Future<L>
+  Future<List<Articles>> searchNews(String search) async {
+    List<Articles> articles = [];
+
+    await dioHelper.searchData(query: {
+      'q': search,
+      'language ': 'ar',
+      'apiKey': AppConstants.API_KEY
+    }).then((response) {
+      response.forEach((article) {
+        final articleModel = Articles.fromJson(article);
+        if (articleModel.urlToImage != '') articles.add(articleModel);
+      });
+    });
+
+    return articles;
+  }
 
   Future<List<Articles>> getAllArticles(
       String url, Map<String, dynamic> query) async {
@@ -13,8 +29,8 @@ class NewsRepository {
     List<Articles> articles = [];
     await dioHelper.getData(url: url, query: query).then((value) => {
           value.data['articles'].forEach((element) {
-            Articles articalModel = Articles.fromJson(element);
-            if (articalModel.urlToImage != "") articles.add(articalModel);
+            Articles articleModel = Articles.fromJson(element);
+            if (articleModel.urlToImage != "") articles.add(articleModel);
           })
         });
     // NewsArticles newsArticles = await dioHelper
