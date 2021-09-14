@@ -16,31 +16,7 @@ class TechnologyScreen extends StatelessWidget {
         builder: (context, state) {
           List<Articles> tech =
               BlocProvider.of<ArticlesCubit>(context).technologies;
-          final cubit = BlocProvider.of<ArticlesCubit>(context);
-          if (state is ArticlesSearchLoading)
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-
-          if (state is ArticlesSearchFinished) {
-            return buildArticlesList(
-                articles: tech, context: context, onRefresh: 'tech');
-          } else if (cubit.searchedArticles.length != 0) {
-            return buildArticlesList(
-                articles: cubit.searchedArticles,
-                context: context,
-                onRefresh: 'tech');
-          } else if (tech.length != 0) {
-            return buildArticlesList(
-                articles: tech, context: context, onRefresh: 'tech');
-          }
-          // } else if (state is ArticlesLoadedState)
-          //   return buildArticlesList(articles: state.articles);
-          // else if (state is ArticlesErrorState)
-          //   return Center(
-          //     child: Text(state.error),
-          //   );
-          return Center(child: CircularProgressIndicator());
+          return ArticleListView(state, tech);
         },
       ),
     );

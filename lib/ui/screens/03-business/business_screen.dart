@@ -15,36 +15,11 @@ class BusinessScreen extends StatelessWidget {
       body: BlocConsumer<ArticlesCubit, ArticlesState>(
         listener: (context, state) {},
         builder: (context, state) {
-          print('business build....');
           List<Articles> business =
               BlocProvider.of<ArticlesCubit>(context).business;
-          final cubit = BlocProvider.of<ArticlesCubit>(context);
-          if (state is ArticlesSearchLoading)
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          if (state is ArticlesSearchFinished) {
-            return buildArticlesList(
-                articles: business, context: context, onRefresh: 'business');
-          } else if (cubit.searchedArticles.length != 0) {
-            return buildArticlesList(
-                articles: cubit.searchedArticles,
-                context: context,
-                onRefresh: 'business');
-          } else if (business.length != 0) {
-            return buildArticlesList(
-                articles: business, context: context, onRefresh: 'business');
-          }
-          // } else if (state is ArticlesLoadedState)
-          //   return buildArticlesList(articles: state.articles);
-          // else if (state is ArticlesSearchLoadedState)
-          //   return buildArticlesList(articles: state.articles);
-          // else if (state is ArticlesErrorState)
-          //   return Center(
-          //     child: Text(state.error),
-          //   );
 
-          return Center(child: CircularProgressIndicator());
+          return ArticleListView(state, business);
+          print('business build....');
         },
       ),
     );
