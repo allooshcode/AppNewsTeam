@@ -17,7 +17,10 @@ class ScienceScreen extends StatelessWidget {
           List<Articles> science =
               BlocProvider.of<ArticlesCubit>(context).science;
           final cubit = BlocProvider.of<ArticlesCubit>(context);
-
+          if (state is ArticlesSearchLoading)
+            return Center(
+              child: CircularProgressIndicator(),
+            );
           if (state is ArticlesSearchFinished) {
             return buildArticlesList(
                 articles: science, context: context, onRefresh: 'science');

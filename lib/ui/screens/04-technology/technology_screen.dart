@@ -17,6 +17,10 @@ class TechnologyScreen extends StatelessWidget {
           List<Articles> tech =
               BlocProvider.of<ArticlesCubit>(context).technologies;
           final cubit = BlocProvider.of<ArticlesCubit>(context);
+          if (state is ArticlesSearchLoading)
+            return Center(
+              child: CircularProgressIndicator(),
+            );
 
           if (state is ArticlesSearchFinished) {
             return buildArticlesList(
