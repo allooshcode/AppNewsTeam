@@ -36,6 +36,7 @@ class ArticlesCubit extends Cubit<ArticlesState> {
 
   void searchArticlesNews(String search) {
     if (search.isEmpty) {
+      searchedArticles = [];
       emit(ArticlesSearchFinished());
     } else {
       emit(ArticlesSearchLoading());
