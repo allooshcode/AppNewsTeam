@@ -32,7 +32,7 @@ class ArticlesCubit extends Cubit<ArticlesState> {
   ];
 
   List<Articles> searchedArticles = [];
-  late TextEditingController textSearch;
+  TextEditingController textSearch = TextEditingController();
 
   void searchArticlesNews(String search) {
     if (search.isEmpty) {

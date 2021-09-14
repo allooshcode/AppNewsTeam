@@ -49,7 +49,7 @@ class HomeScreen extends StatelessWidget {
                                 : AppColors.scaffoldBackground,
                             borderRadius: BorderRadius.circular(20)),
                         child: TextField(
-                            controller: textSearch,
+                            controller: _cubit.textSearch,
                             maxLines: 1,
                             onChanged: (value) {
                               _cubit.searchArticlesNews(value);
