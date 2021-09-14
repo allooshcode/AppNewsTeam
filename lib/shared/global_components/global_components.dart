@@ -3,63 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/business_logic/cubit/articles_cubit.dart';
 import 'package:news_app/business_logic/cubit/articles_states.dart';
 import 'package:news_app/data/models/articles.dart';
+import 'package:news_app/shared/global_components/list_item.dart';
 import 'package:news_app/ui/screens/06-details/details_screen.dart';
-
-Widget listItem({required Articles article}) {
-  return Builder(
-    builder: (context) => InkWell(
-      onTap: () {
-        Navigator.of(context, rootNavigator: true)
-            .pushReplacement(MaterialPageRoute(
-          builder: (context) => new DetailsScreen(
-            article: article,
-          ),
-        ));
-      },
-      child: Row(
-        children: [
-          Expanded(
-            flex: 3,
-            child: Hero(
-              tag: article.publishedAt,
-              child: Image.network(
-                article.urlToImage,
-              ),
-            ),
-          ),
-          SizedBox(
-            width: 12,
-          ),
-          Expanded(
-            flex: 3,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(article.title,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: Theme.of(context).textTheme.bodyText1),
-                Text(article.description,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: Theme.of(context).textTheme.bodyText1),
-                SizedBox(
-                  height: 12,
-                ),
-                Text(
-                  article.publishedAt,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(fontSize: 14, color: Colors.grey),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    ),
-  );
-}
 
 class ArticleListView extends StatelessWidget {
   final ArticlesState state;
@@ -99,14 +44,9 @@ Widget buildArticlesList(
     onRefresh: () => _onRefresh(onRefresh: onRefresh, context: context),
     child: Padding(
       padding: EdgeInsets.only(left: 12, right: 12),
-      child: ListView.separated(
+      child: ListView.builder(
         itemBuilder: (context, index) {
-          return listItem(article: articles[index]);
-        },
-        separatorBuilder: (context, index) {
-          return SizedBox(
-            height: 16,
-          );
+          return ListItem(article: articles[index]);
         },
         itemCount: articles.length,
         physics: BouncingScrollPhysics(),

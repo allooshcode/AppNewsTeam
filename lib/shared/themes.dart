@@ -5,6 +5,10 @@ import 'package:news_app/shared/colors.dart';
 
 class AppTheme {
   static final ThemeData lightTheme = ThemeData(
+      textTheme: TextTheme(
+          bodyText2: TextStyle(fontSize: 14, color: Colors.grey),
+          bodyText1: TextStyle(
+              fontWeight: FontWeight.bold, fontSize: 16, color: Colors.black)),
       primaryColor: AppColors.main,
       primarySwatch: Colors.red,
       scaffoldBackgroundColor: AppColors.scaffoldBackground,
@@ -30,8 +34,10 @@ class AppTheme {
 
   static final ThemeData darkTheme = ThemeData(
       // primaryColor: Colors.white,
+
       primarySwatch: Colors.deepOrange,
       textTheme: TextTheme(
+        bodyText2: TextStyle(fontSize: 14, color: Colors.grey),
         bodyText1: TextStyle(
             fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white),
       ),

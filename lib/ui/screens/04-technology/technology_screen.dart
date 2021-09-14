@@ -6,7 +6,7 @@ import 'package:news_app/data/models/articles.dart';
 import 'package:news_app/data/repository/news_repository.dart';
 import 'package:news_app/data/web_services.dart';
 import 'package:news_app/shared/colors.dart';
-import 'package:news_app/shared/global_components.dart';
+import 'package:news_app/shared/global_components/global_components.dart';
 
 class TechnologyScreen extends StatelessWidget {
   @override
