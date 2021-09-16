@@ -10,7 +10,7 @@ class ListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => navigateToDetails,
+      onTap: () => navigateToDetails(context),
       child: Row(
         children: [
           _buildArticleImage(article),
