@@ -12,8 +12,7 @@ class BusinessScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocConsumer<ArticlesCubit, ArticlesState>(
-        listener: (context, state) {},
+      body: BlocBuilder<ArticlesCubit, ArticlesState>(
         builder: (context, state) {
           List<Articles> business =
               BlocProvider.of<ArticlesCubit>(context).business;

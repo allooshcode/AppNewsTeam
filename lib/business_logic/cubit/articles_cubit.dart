@@ -57,11 +57,7 @@ class ArticlesCubit extends Cubit<ArticlesState> {
     // print(business.length);
     if (business.length == 0) {
       emit(ArticlesLoadingState());
-      newsRepository.getAllArticles(AppConstants.URL, {
-        'country': 'eg',
-        'category': 'business',
-        'apiKey': AppConstants.API_KEY
-      }).then((value) {
+      newsRepository.getAllArticles('business').then((value) {
         business = value;
         emit(ArticlesLoadedState(business));
       }).catchError((err) {
@@ -76,11 +72,7 @@ class ArticlesCubit extends Cubit<ArticlesState> {
   List<Articles> getTechnologyArticles() {
     if (technologies.length == 0) {
       emit(ArticlesLoadingState());
-      newsRepository.getAllArticles(AppConstants.URL, {
-        'country': 'eg',
-        'category': 'technology',
-        'apiKey': AppConstants.API_KEY
-      }).then((articles) {
+      newsRepository.getAllArticles('technology').then((articles) {
         technologies = articles;
         emit(ArticlesLoadedState(technologies));
       }).catchError((err) {
@@ -96,11 +88,7 @@ class ArticlesCubit extends Cubit<ArticlesState> {
   List<Articles> getScienceArticles() {
     if (science.length == 0) {
       emit(ArticlesLoadingState());
-      newsRepository.getAllArticles(AppConstants.URL, {
-        'country': 'eg',
-        'category': 'science',
-        'apiKey': AppConstants.API_KEY
-      }).then((articles) {
+      newsRepository.getAllArticles('science').then((articles) {
         science = articles;
         emit(ArticlesLoadedState(science));
       }).catchError((err) {

@@ -13,9 +13,12 @@ class DioHelper {
     dio = Dio(options);
   }
 
-  Future<Response> getData(
-      {required String url, required Map<String, dynamic> query}) async {
-    final response = await dio.get(url, queryParameters: query);
+  Future<Response> getData({required String category}) async {
+    final response = await dio.get(AppConstants.URL, queryParameters: {
+      'country': 'eg',
+      'category': category,
+      'apiKey': AppConstants.API_KEY
+    });
     return response;
   }
 

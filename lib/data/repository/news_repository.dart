@@ -23,11 +23,10 @@ class NewsRepository {
     return articles;
   }
 
-  Future<List<Articles>> getAllArticles(
-      String url, Map<String, dynamic> query) async {
+  Future<List<Articles>> getAllArticles(String category) async {
     print('get all articles');
     List<Articles> articles = [];
-    await dioHelper.getData(url: url, query: query).then((value) => {
+    await dioHelper.getData(category: category).then((value) => {
           value.data['articles'].forEach((element) {
             Articles articleModel = Articles.fromJson(element);
             if (articleModel.urlToImage != "") articles.add(articleModel);

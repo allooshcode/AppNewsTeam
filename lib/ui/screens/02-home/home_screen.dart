@@ -18,13 +18,11 @@ class HomeScreen extends StatelessWidget {
   final _keyNavigator = GlobalKey<NavigatorState>();
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<ArticlesCubit, ArticlesState>(
-      listener: (context, state) {},
+    return BlocBuilder<ArticlesCubit, ArticlesState>(
       builder: (context, state) {
         print('consumerr.............. build');
         ArticlesCubit _cubit = BlocProvider.of<ArticlesCubit>(context);
-        return BlocConsumer<ThemeCubit, ThemeState>(
-          listener: (context, state) {},
+        return BlocBuilder<ThemeCubit, ThemeState>(
           builder: (context, state) {
             ThemeCubit _cubitTheme = BlocProvider.of<ThemeCubit>(context);
 
@@ -35,7 +33,11 @@ class HomeScreen extends StatelessWidget {
                       onChanged: (value) {
                         _cubitTheme.changeThemeMode();
                       }),
-                  title: FittedBox(child: Text('News App')),
+                  title: FittedBox(
+                      child: Text(
+                    'News App',
+                    style: AppBarTheme.of(context).titleTextStyle,
+                  )),
                   actions: [
                     Container(
                         padding: EdgeInsetsDirectional.only(top: 4, start: 6),

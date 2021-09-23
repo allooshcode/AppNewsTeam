@@ -28,7 +28,6 @@ class AppTheme {
               color: AppColors.main, fontSize: 22, fontWeight: FontWeight.bold),
           titleSpacing: 20.0,
           backgroundColor: AppColors.scaffoldBackground,
-          // color: AppColors.scaffoldBackground,
           elevation: 0,
           iconTheme: IconThemeData(color: AppColors.main)));
 
@@ -55,7 +54,7 @@ class AppTheme {
               statusBarIconBrightness: Brightness.light,
               statusBarColor: HexColor('333739')),
           titleTextStyle: TextStyle(
-              color: AppColors.main, fontSize: 22, fontWeight: FontWeight.bold),
+              color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold),
           titleSpacing: 20.0,
           backgroundColor: HexColor('333739'),
           elevation: 0,
