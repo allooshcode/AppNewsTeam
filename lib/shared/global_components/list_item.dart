@@ -13,7 +13,7 @@ class ListItem extends StatelessWidget {
       onTap: () => navigateToDetails(context),
       child: Row(
         children: [
-          _buildArticleImage(article),
+          Expanded(child: _buildArticleImage(article)),
           SizedBox(
             width: 12,
           ),

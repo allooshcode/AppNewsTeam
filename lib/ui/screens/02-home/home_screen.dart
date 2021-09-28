@@ -54,16 +54,7 @@ class HomeScreen extends StatelessWidget {
                             controller: _cubit.textSearch,
                             maxLines: 1,
                             onChanged: (value) {
-                              _cubit.searchArticlesNews(value);
-
-                              // if (_cubit.textSearch.text.isEmpty) {
-                              //   if (index == 0) {
-                              //     _cubit.getBusinessArticles();
-                              //   } else if (index == 1) {
-                              //     _cubit.getTechnologyArticles();
-                              //   }
-                              //   _cubit.getScienceArticles();
-                              // }
+                              _cubit.searchArticlesNews();
                             },
                             decoration: InputDecoration(
                                 hintText: 'Search ', border: InputBorder.none
@@ -84,6 +75,7 @@ class HomeScreen extends StatelessWidget {
                   currentIndex: _cubit.index,
                   onTap: (index) {
                     _cubit.changeBottomNavigationIndex(index);
+                    _cubit.searchedArticles = [];
 
                     if (index == 0) {
                       _keyNavigator.currentState!

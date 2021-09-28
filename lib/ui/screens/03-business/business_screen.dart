@@ -18,7 +18,6 @@ class BusinessScreen extends StatelessWidget {
               BlocProvider.of<ArticlesCubit>(context).business;
 
           return ArticleListView(state, business);
-          print('business build....');
         },
       ),
     );

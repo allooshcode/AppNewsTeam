@@ -34,7 +34,7 @@ class _NewsAppState extends State<NewsApp> {
         BlocProvider(
             create: (_) => ArticlesCubit(NewsRepository(DioHelper()))
               ..getScienceArticles()
-              ..getTechnologyArticles()
+              ..getTechnologyArticles(isRefresh: false)
               ..getBusinessArticles()),
       ],
       child: BlocConsumer<ThemeCubit, ThemeState>(

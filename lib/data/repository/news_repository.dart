@@ -6,13 +6,15 @@ class NewsRepository {
   final DioHelper dioHelper;
   NewsRepository(this.dioHelper);
 
-  Future<List<Articles>> searchNews(String search) async {
+  Future<List<Articles>> searchNews(
+      {required String search, int page = 1}) async {
     List<Articles> articles = [];
 
     await dioHelper.searchData(query: {
       'q': search,
       'language ': 'ar',
-      'apiKey': AppConstants.API_KEY
+      'apiKey': AppConstants.API_KEY,
+      'page': page
     }).then((response) {
       response.forEach((article) {
         final articleModel = Articles.fromJson(article);
@@ -32,14 +34,7 @@ class NewsRepository {
             if (articleModel.urlToImage != "") articles.add(articleModel);
           })
         });
-    // NewsArticles newsArticles = await dioHelper
-    //     .getData(url: url, query: query)
-    //     .then((response) => NewsArticles(
-    //         response.data['status'],
-    //         response.data['articles']
-    //             .map((article) => Articles.fromJson(article))
-    //             .toList() as List<Articles>));
-    //
+
     print('finish get all articles');
     for (var article in articles) {
       print(article.title);
