@@ -37,8 +37,7 @@ class _NewsAppState extends State<NewsApp> {
               ..getTechnologyArticles(isRefresh: false)
               ..getBusinessArticles()),
       ],
-      child: BlocConsumer<ThemeCubit, ThemeState>(
-        listener: (context, state) {},
+      child: BlocBuilder<ThemeCubit, ThemeState>(
         builder: (context, state) {
           ThemeCubit _cubitTheme = BlocProvider.of<ThemeCubit>(context);
 
